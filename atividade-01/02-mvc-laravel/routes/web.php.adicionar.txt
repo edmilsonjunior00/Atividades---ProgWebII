@@ -1,0 +1,13 @@
+ADICIONE estas rotas no arquivo 02-mvc-laravel/routes/web.php.
+
+No topo do arquivo, junto aos outros imports:
+
+use App\Http\Controllers\CategoriaController;
+
+Depois das rotas que já existem:
+
+Route::get('/categorias', [CategoriaController::class, 'index'])
+    ->name('categorias.index');
+
+Route::get('/categorias/{id}', [CategoriaController::class, 'show'])
+    ->name('categorias.show');
