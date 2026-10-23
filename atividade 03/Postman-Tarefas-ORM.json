@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "PWB2 - Aula 06 ORM - Tarefas",
+    "description": "Testes básicos para a API de tarefas. Inicie o backend antes de usar.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Listar tarefas",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/api/tarefas"
+      }
+    },
+    {
+      "name": "Buscar tarefa 1",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/api/tarefas/1"
+      }
+    },
+    {
+      "name": "Criar tarefa",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Fazer atividade\",\n  \"descricao\": \"Aula de ORM\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/api/tarefas"
+      }
+    },
+    {
+      "name": "Atualizar tarefa 1",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"concluida\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/api/tarefas/1"
+      }
+    },
+    {
+      "name": "Excluir tarefa 1",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:3000/api/tarefas/1"
+      }
+    }
+  ]
+}

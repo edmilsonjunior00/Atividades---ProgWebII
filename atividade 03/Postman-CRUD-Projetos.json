@@ -1,0 +1,240 @@
+{
+  "info": {
+    "name": "Atividade 02 - CRUD de Projetos (NestJS)",
+    "description": "Coleção de testes para a atividade de CRUD de Projetos. Base URL padrão: http://localhost:3000. O backend precisa estar iniciado antes dos testes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "projectId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "1 - Listar projetos (200)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2 - Criar projeto válido (201)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status deve ser 201 Created', function () { pm.response.to.have.status(201); });",
+              "try { const body = pm.response.json(); if (body && body.id !== undefined) pm.collectionVariables.set('projectId', String(body.id)); } catch (e) {}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Faculdade\",\n  \"descricao\": \"Projeto da faculdade\",\n  \"cor\": \"azul\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3 - Nome muito curto (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"ab\",\n  \"cor\": \"azul\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4 - Cor inválida (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Trabalho\",\n  \"cor\": \"rosa\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5 - Campo extra não permitido (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Estudo\",\n  \"cor\": \"verde\",\n  \"xpto\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "6 - Consultar projeto inexistente (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos/999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos",
+            "999"
+          ]
+        }
+      }
+    },
+    {
+      "name": "7 - Atualizar projeto (200)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Faculdade 2026\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos/{{projectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos",
+            "{{projectId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "8 - Excluir projeto (204)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/projetos/{{projectId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "projetos",
+            "{{projectId}}"
+          ]
+        }
+      }
+    }
+  ]
+}
